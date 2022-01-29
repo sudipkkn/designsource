@@ -40,6 +40,7 @@ Route::prefix('wa-admin')->middleware('adminlogin')->group(function () {
 
     Route::get('addnewproduct', [ProductController::class, 'viewAddProduct']);
     Route::post('addproduct', [ProductController::class, 'addProduct']);
+    Route::get('productlist', [ProductController::class, 'productList']);
     
     
 });

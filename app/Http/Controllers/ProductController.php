@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProductCat;
 use App\Models\Product;
+use App\Models\AddedProCat;
 
 class ProductController extends Controller
 {
@@ -98,14 +99,32 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->offerprice = $request->offerprice;
-        $product->procats = $request->procats;
         $product->image = $imageName;
-        $product->status = $request->status;
+        $product->status = 1;
         $product->save();
 
         request()->image->move(public_path().'/uploaded/', $imageName);
         
+        $procats = $request->procats;
+
+        for($i=0; $i < count($procats); $i++ ){
+
+            $insrtary[] = [
+                'cat_id' => $procats[$i],
+                'product_id' => $product->id
+            ];
+        }
+        AddedProCat::insert($insrtary);
+
         return back()->with('success', $request->name. 'is Successfully Added');
+
+    }
+
+    function productList(){
+
+        $data = Product::orderBy('id', 'desc')->paginate(10);
+
+        return view('admin/productlist', ['data' => $data]);
 
     }
 

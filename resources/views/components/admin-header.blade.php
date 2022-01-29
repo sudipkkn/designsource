@@ -66,7 +66,7 @@ $userdtl = UserController::getUserdata();
                         <div class="menu-title">Products</div>
                     </a>
                     <ul class="mm-collapse" style="height: 2px;">
-                        <li> <a href="#0"><i class="bx bx-right-arrow-alt"></i>Products List</a>
+                        <li> <a @if (Request::path() == 'wa-admin/productlist') class="mm-active" @endif href="{{URL::to('wa-admin/productlist')}}"><i class="bx bx-right-arrow-alt"></i>Products List</a>
                         </li>
                         <li @if (Request::path() == 'wa-admin/manageprocats' || Request::path() == 'wa-admin/editprocats/') class="mm-active" @endif> <a href="{{ URL::to('wa-admin/manageprocats') }}"><i class="bx bx-right-arrow-alt"></i>Product
                                 Categories</a>
@@ -75,6 +75,8 @@ $userdtl = UserController::getUserdata();
                         <li @if (Request::path() == 'wa-admin/addnewproduct') class="mm-active" @endif> <a href="{{URL::to('wa-admin/addnewproduct')}}"><i class="bx bx-right-arrow-alt"></i>Add new
                                 Product</a>
                         </li>
+
+
 
                     </ul>
                 </li>
