@@ -128,4 +128,16 @@ class ProductController extends Controller
 
     }
 
+    function viewEditProduct($id){
+
+        $getprocats = ProductCat::where('status', '1')->get();
+        $data = Product::find($id);
+
+        return $checkcats = ProductCat::leftJoin('added_pro_cats', 'product_cats.id', '=', 'added_pro_cats.cat_id')
+                                //->where('added_pro_cats.product_id', '=', $data->id)
+                                ->get(['product_cats.*', 'added_pro_cats.cat_id as addedcatid']);
+
+        return view('admin/modifyproduct', ['data'=> $data, 'procats' => $getprocats, 'checkcats' => $checkcats]);
+    }
+
 }

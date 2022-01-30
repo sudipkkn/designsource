@@ -41,11 +41,11 @@
                                </td>
                                <td>{{ $product->updated_at->format('D, d M Y, h:i a') }}</td>
                                <td>#{{$product['price']}}</td>
-                               <td class=""><span class="badge bg-light-success text-success w-100">Completed</span></td>
+                               <td class=""> @if($product['status']==1) <span class="badge bg-light-info text-info w-100">Published</span> @else <span class="badge bg-light-warning text-warning w-100">Drafted</span> @endif </td>
                                
                                <td>
                                 <div class="d-flex order-actions">	<a href="javascript:;" class="text-danger bg-light-danger border-0"><i class="bx bxs-trash"></i></a>
-                                    <a href="javascript:;" class="ms-4 text-primary bg-light-primary border-0"><i class="bx bxs-edit"></i></a>
+                                    <a href="{{URL::to('wa-admin/modifyproduct/'.$product['id'])}}" class="ms-4 text-primary bg-light-primary border-0"><i class="bx bxs-edit"></i></a>
                                 </div>
                                </td>
                            </tr>
